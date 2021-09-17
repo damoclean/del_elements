@@ -57,6 +57,5 @@ function filter(tagArr, idArr, classArr) {
 
 
 chrome.storage.sync.get(['tag', 'id', 'class'], function (items) {
-    console.log(items.tag, items.id, items.class)
     filter(items.tag, items.id, items.class)
 })
