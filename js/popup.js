@@ -55,5 +55,9 @@ $('#start').click(function (){
     bg.getCurrentTabId();
 })
 $('#reset').click(function (){
-    location.reload();
+    chrome.storage.sync.clear(function (){
+        console.log('clear！');
+        location.reload();
+    })
+
 })

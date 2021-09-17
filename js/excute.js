@@ -18,7 +18,7 @@ function isIn(args, arr) {
 
 function filter(tagArr, idArr, classArr) {
     const defaultTag = ['img', 'a', 'video', 'iframe'];
-    if (tagArr.length) {
+    if (tagArr !== undefined) {
         for (let j of tagArr) {
             if (isIn(j, defaultTag) === true) {
                 for (let i of document.getElementsByTagName(j)) {
@@ -40,16 +40,16 @@ function filter(tagArr, idArr, classArr) {
         }
     }
 
-    if (idArr.length) {
+    if (idArr !== undefined) {
         for (let j of idArr) {
-            document.getElementsById(j).remove();
+            document.getElementById(j).remove();
         }
     }
 
-    if (classArr.length) {
+    if (classArr !== undefined) {
         for (let j of classArr) {
-            while (document.getElementsByClassName(j).length !== 0) {
-                document.getElementsByClassName(j)[0].remove()
+            for(let i of document.getElementsByClassName(j)){
+                i.remove();
             }
         }
     }
@@ -57,5 +57,6 @@ function filter(tagArr, idArr, classArr) {
 
 
 chrome.storage.sync.get(['tag', 'id', 'class'], function (items) {
+    console.log(items.tag, items.id, items.class)
     filter(items.tag, items.id, items.class)
 })
